@@ -1,6 +1,6 @@
 
 import '../App.css';
-
+import {Link} from 'react-router-dom';
 const Header = () => {
     return (
         <>
@@ -10,9 +10,9 @@ const Header = () => {
                 </div>
 
                 <nav>
-                    <a href="">Home</a>
+                    <Link to="/landing">Home</Link>
 
-                    <a href="">Return</a>
+                    <Link to="">Return</Link>
                 </nav>
             </div>
         </>

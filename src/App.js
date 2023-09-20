@@ -1,35 +1,30 @@
-
-import Header from "./Components/Header"
-import Login from "./Components/Login";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Observation from "./Components/Observation";
-import Landing from "./Components/Landing";
-import Tinting from "./Components/Tinting-Banco";
+// App.js
+import React, { useState } from 'react';
+import {  BrowserRouter as Router,Route, Routes } from 'react-router-dom';
+import Header from './Components/Header';
+import Observation from './Components/Observation';
+import Landing from './Components/Landing';
+import Tinting from './Components/Tinting-Banco';
+import Login from './Components/Login';
 
 function App() {
+  const [token, setToken] = useState(false);
+  const [user,setUser]=useState(" ");
   return (
     <Router>
-      <>
-      {/* <div className="App"> */}
-        <Header />
-        <Switch>
-          <Route exact path="/">
-            <Login />
-          </Route>
-          <Route exact path="/Observation">
-            <Observation />
-          </Route>
-          <Route exact path="/Landing">
-            <Landing/>
-          </Route>
-          <Route exact path="/Tinting-Banco">
-            <Tinting />
-          </Route>
-        </Switch>
-
-      </>
-    </Router>
+        <>
+          <Header />
+          <Routes>
+          
+            <Route path="/" element={token ? <Landing /> : <Login setToken={setToken} setUser={setUser} />} />
+            <Route path="/observation" element={token ?  <Observation />:<Login setToken={setToken} setUser={setUser} />} />
+            <Route path="/landing" element={token ? <Landing username={user} />:<Login setToken={setToken} setUser={setUser} />} />
+            <Route path="/tinting" element={token ?  <Tinting />:<Login setToken={setToken} setUser={setUser} />} />
+          </Routes>
+        </>
+        </Router>
   );
 }
 
 export default App;
+

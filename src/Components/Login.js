@@ -2,14 +2,14 @@
 import {useState} from "react";
 import { ToastContainer,toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { useHistory } from 'react-router-dom';
-const  LoginPage= () => 
+import {useNavigate} from "react-router-dom"
+const  LoginPage= ({ setToken, setUser }) => 
 {
-    const history = useHistory();
-    const pattern=new RegExp('^\s*$');
+    const navigate = useNavigate();
+    const pattern=new RegExp('^\s+');
     const [Username,setUsername]=useState('');
     const [Password,setPassword]=useState('');
-    const [con,setCon]=useState(false);
+    
     const handleSubmit=(e)=>{
       e.preventDefault();
       if(validate())
@@ -24,9 +24,10 @@ const  LoginPage= () =>
                     if(json[0].password===Password)
                     {
                      
-                      setCon(true);
-                      history.push('./Observation')
-
+                      setToken(true);
+                      setUser(Username)
+                      navigate("/landing")
+                     
                     }
                     else
                     {
