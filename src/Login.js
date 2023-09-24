@@ -3,6 +3,7 @@ import {useState} from "react";
 import { ToastContainer,toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import {useNavigate} from "react-router-dom";
+import {Link} from 'react-router-dom';
 const LoginPage = ({setToken,setUser}) => {
     const navigate = useNavigate();
     const pattern=new RegExp('^\s+');

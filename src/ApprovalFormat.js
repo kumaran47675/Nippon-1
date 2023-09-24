@@ -2,10 +2,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
+import {useNavigate,Link} from "react-router-dom";
  
 
 const ApprovalFormat = ({Username}) => {
+  
   const [Site, setSite] = useState('');
   const [DateAndTime, setDateTime] = useState('');
   const [Issuer, setIssuer] = useState('');
@@ -68,56 +69,67 @@ const ApprovalFormat = ({Username}) => {
   return (
 <>
 <nav className="navbar navbar-expand-lg navbar-dark bg-primary w-100">
+
 <div className="container-fluid">
+
 <a className="navbar-brand" href="#">
+
 <img src="icon.png" alt="Logo" className="logo" />
+
 </a>
+
 <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
+
+className="navbar-toggler"
+
+type="button"
+
+data-bs-toggle="collapse"
+
+data-bs-target="#navbarNav"
+
+aria-controls="navbarNav"
+
+aria-expanded="false"
+
+aria-label="Toggle navigation"
+
 >
+
 <span className="navbar-toggler-icon"></span>
+
 </button>
+
 <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+
 <ul className="navbar-nav">
-              {/* Display "Home" and "View Details" links on larger screens */}
-<li className="nav-item d-lg-none">
-<a className="nav-link text-white" href="#">
-                  Home
-</a>
+
+<li className="nav-item">
+
+<Link className="nav-link" to="/approvalformat">
+
+Home
+
+</Link>
+
 </li>
-<li className="nav-item d-lg-none">
-<a className="nav-link text-white" href="#">
-                  View Details
-</a>
+
+<li className="nav-item">
+
+<Link className="nav-link" to={"/viewdetails"}>
+
+View Details
+
+</Link>
+
 </li>
-              {/* Responsive menu with three dots for smaller screens */}
-<li className="nav-item dropdown d-none d-lg-block">
-<button
-                  className="nav-link dropdown-toggle btn btn-link text-white"
-                  type="button"
-                  id="menuButton"
-                  data-bs-toggle="dropdown"
->
-<li className="fas fa-ellipsis-v"></li>
-</button>
-<div className="dropdown-menu" aria-labelledby="menuButton">
-<a className="dropdown-item" href="#">
-                    Home
-</a>
-<a className="dropdown-item" href="#">
-                    View Details
-</a>
-</div>
-</li>
+
 </ul>
+
 </div>
+
 </div>
+
 </nav>
 
  
