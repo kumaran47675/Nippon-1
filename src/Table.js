@@ -2,28 +2,32 @@ import {useState,useEffect} from "react";
 import { ToastContainer,toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
-
+import axios from 'axios';
 const Tables = ({Username}) => {
-  const [users, setUsers] = useState([])
-  const navigation=useNavigate();
-  useEffect(()=>{
-      fetch(`https://localhost:7113/api/heightwork/get/${Username}`)
-      .then(response=>response.json().then(json=>{
-        if(json.length==0)
-        {
-            alert("You have not posted any data");
-            navigation("/approvalformat")
-        }
-        else
-        {
-          
-          setUsers(json)
-          console.log(users);
-        }
-      }))},[])
+  const [data,setData]=useState([]);
+  const [loading, setLoading] = useState(false)
+  
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`https://localhost:7113/api/heightwork/get/${Username}`)
+      .then((response) => {
+        console.log(response.data)
+        setData(response.data); // Use response.data directly
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+  
     return ( 
   <div>
+    
   <table>
+    <thead>
   <tr>
     <th>Site</th>
     <th>Date & Time</th>
@@ -41,27 +45,32 @@ const Tables = ({Username}) => {
     <th>Permit Approved by Site FHS</th>
     <th>Permit Verified and Closed</th>
   </tr>
-   {users.map(user=>(
-    <tr>
-      <td>{user.Site}</td>
-      <td>{user.DateAndTime}</td>
-      <td>{user.Issuer}</td>
-      <td>{user.Receiver}</td>
-      <td>{user.NatureOfWork}</td>
-      <td>{user.WorkArea}</td>
-      <td>{user.RiskAssociatedWithTheWork}</td>
-      <td>{user.RiskAssessmentDetail}</td>
-      <td>{user.RecommendedPpe}</td>
-      <td>{user.SpecialInstruction}</td>
-      <td>{user.PossibleEmergencySituation}</td>
-      <td>{user.PrecautionTakenToSupportEmergencySituation}</td>
-      <td>{user.OtherPermitsApplicable}</td>
-      <td>{user.PermitApprovedBySiteFhs}</td>
-      <td>{user.PermitVerifiedAndClosed}</td>
-  
-  
-    </tr>
-   ))}
+  </thead>
+  <tbody>
+    {loading==false && data.map(user=>{
+
+return <tr key={user.id}>
+  <td>{user.site}</td>
+  <td>{user.dateAndTime}</td>
+  <td>{user.issuer}</td>
+  <td>{user.receiver}</td>
+  <td>{user.natureOfWork}</td>
+  <td>{user.workArea}</td>
+  <td>{user.riskAssociatedWithTheWork}</td>
+  <td>{user.riskAssessmentDetail}</td>
+  <td>{user.recommendedPpe}</td>
+  <td>{user.specialInstruction}</td>
+  <td>{user.possibleEmergencySituation}</td>
+  <td>{user.precautionTakenToSupportEmergencySituation}</td>
+  <td>{`${user.otherPermitsApplicable}`}</td>
+  <td>{`${user.permitApprovedBySiteFhs}`}</td>
+  <td>{`${user.permitVerifiedAndClosed}`}</td>
+
+
+</tr>
+
+})}
+ </tbody>
 </table>
 </div>
      );
