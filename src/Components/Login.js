@@ -1,15 +1,16 @@
-// import './login.css';
+
+import LoginCSS from './Login.module.css';
 import {useState} from "react";
 import { ToastContainer,toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import {useNavigate} from "react-router-dom"
 const  LoginPage= ({ setToken, setUser }) => 
 {
-    const navigate = useNavigate();
-    const pattern=new RegExp('^\s+');
+  const navigate = useNavigate();
+    const pattern=new RegExp('^\s*$');
     const [Username,setUsername]=useState('');
     const [Password,setPassword]=useState('');
-    
+    const [con,setCon]=useState(false);
     const handleSubmit=(e)=>{
       e.preventDefault();
       if(validate())
@@ -27,7 +28,7 @@ const  LoginPage= ({ setToken, setUser }) =>
                       setToken(true);
                       setUser(Username)
                       navigate("/landing")
-                     
+
                     }
                     else
                     {
@@ -99,14 +100,14 @@ const  LoginPage= ({ setToken, setUser }) =>
     }
     
     return (
-    <div className="adjustment">    
-        <div className="login-container">
+    <div className={LoginCSS.adjustment}>    
+        <div className={LoginCSS.login_container}>
 
             <h2>Login</h2>
             <form  onSubmit={handleSubmit}>
             <input
                 type="text"
-                className="login-input"
+                className={LoginCSS.login_input}
                 placeholder="Username"
                 value={Username}
                 onChange={(e)=>{setUsername(e.target.value)}}
@@ -114,13 +115,13 @@ const  LoginPage= ({ setToken, setUser }) =>
             />
             <input
                 type="password"
-                className="login-input"
+                className={LoginCSS.login_input}
                 placeholder="Password"
                 value={Password}
                 onChange={(e)=>{setPassword(e.target.value)}}
                 required
             />
-            <button type="submit" className="login-button">Login</button>
+            <button type="submit" className={LoginCSS.login_button}>Login</button>
             </form>
             <ToastContainer/>
         </div>

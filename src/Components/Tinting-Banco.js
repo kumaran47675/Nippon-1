@@ -1,4 +1,3 @@
-
 const Tinting = () => {
     return (
     <div className="box">

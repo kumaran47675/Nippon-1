@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // import './CSS/nipponlogo2.png';
 // import './login.css';
 
-function Observation() {
+function Observation({username}) {
   const [Depot,setDepot]=useState('')
   const [BaseTintedAsPerReportInLit,setBr]=useState(0)
   const [BaseTintedAsPerHistoryFileInLit,setBrh]=useState(0)
@@ -15,7 +15,7 @@ function Observation() {
   const [BrandlingForDispensingMachine,setBdm]=useState('OLD')
   const [BrandlingForGyroshakerMachine,setBgm]=useState('OLD')
   const [isPending,setIsPending]=useState(false)
-  var CreateBy='Kumaran';
+  var CreateBy=username;
   const handleSubmit=(e)=>{
     e.preventDefault();
     setIsPending(true)
